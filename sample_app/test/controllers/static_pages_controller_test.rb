@@ -6,7 +6,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get home" do
-    get static_pages_home_url
+    get root_url
     assert_response :success
     assert_select "title", "Home | #{@base_title}"
   end
@@ -25,9 +25,4 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
 
   # contactページを作成するにあたり、「Contact | Ruby on Rails Tutorial Sample App」というタイトルが存在するかどうかを確認する最初にtestをする
   # その後にルーティングやviewの追加をしてテストをパスさせる
-  test "should get contact" do
-    get static_pages_contact_url
-    assert_response :success
-    assert_select "title", "Contact | #{@base_title}"
-  end
 end
