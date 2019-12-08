@@ -48,4 +48,10 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     end
   end
+# メールアドレスの重複拒否 以下では@user情報の重複のためテスト結果はerror
+  test "email addresses should be unique" do
+    duplicate_user = @user.dup
+    @user.save
+    assert_not duplicate_user.valid?
+  end
 end
