@@ -51,6 +51,8 @@ class UserTest < ActiveSupport::TestCase
 # メールアドレスの重複拒否 以下では@user情報の重複のためテスト結果はerror
   test "email addresses should be unique" do
     duplicate_user = @user.dup
+    # 大・小文字の区別がされないため以下の1文追記
+    duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
   end
