@@ -3,7 +3,9 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 # setupメソッドは以下に続くテストより先に実行されるので、同メソッド内でインスタンス変数を定義、以降のtestメソッドで使用できるようにする
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new(
+    name: "Example User", email: "user@example.com",
+    password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -62,5 +64,15 @@ class UserTest < ActiveSupport::TestCase
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+# pass空白可否テスト
+  test "password should be present (nonblank)" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+# pass5桁で登録可否テスト
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 2
+    assert_not @user.valid?
   end
 end
