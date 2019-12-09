@@ -1,5 +1,12 @@
-<p>ユーザー名 | <%= @user.name %>
-<p>アドレス | <%= @user.email %></p>
-<p>作成日時 | <%=@user.created_at%></p>
-<p>更新日時 | <%=@user.updated_at%></p>
-<%=Time.now%>
+<%#  showviewに名前とGravatarを表示する %>
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
