@@ -10,7 +10,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # save 成功時のコード
+      flash[:success]="Welcome to the Sample App!"
+      # URLを書かなくてもrailsがuser_url(@user)と認識する
+      redirect_to @user
     else
       render "new"
     end
